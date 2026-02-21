@@ -7,7 +7,7 @@ const server=express();
 server.use(express.json());
 server.use(cors());
 
-await mongoose.connect("mongodb://127.0.0.1:27017/myapp");
+await mongoose.connect("mongodb+srv://ssvsurajvishwakarma_db_user:7058@cluster0.kn1gsi8.mongodb.net/?appName=Cluster0");
 console.log("MongoDB connected");
 
 const User=mongoose.model("User",new mongoose.Schema({
@@ -30,8 +30,7 @@ server.post("/signup",async (req,res)=>{
     image
    });
   res.json({
-    message:"Account created",
-    Account:user
+    message:"Account created"
   })
 }
 catch(e){
@@ -49,7 +48,7 @@ server.post("/login",async (req,res)=>{
     }
    const cform=await bcrypt.compare(password,user.password);
    if(!cform) return res.json({message:"Invalid password"});
-   res.json({message:"Loged in successfully" ,Account:user.image});
+   res.json({message:"Loged in successfully" ,Account:user});
 });
 
 server.listen(3000,()=>{
