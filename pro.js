@@ -2,13 +2,19 @@ import express from "express";
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import cors from "cors";
+import dotenv from "dotenv";
+dotenv.config();
+
+mongoose.connect(process.env.MONGO_URI)
+.then(() => console.log("MongoDB connected"))
+  .catch(err => console.log("MongoDB error:", err));
+
 
 const server=express();
 server.use(express.json());
 server.use(cors());
 
-await mongoose.connect("mongodb+srv://ssvsurajvishwakarma_db_user:7058@cluster0.kn1gsi8.mongodb.net/?appName=Cluster0");
-console.log("MongoDB connected");
+
 
 const User=mongoose.model("User",new mongoose.Schema({
     name:String,
